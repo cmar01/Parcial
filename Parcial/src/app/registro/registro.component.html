@@ -1,0 +1,54 @@
+<div class="bg">
+    <div class="container">
+        <div class="header">
+            <h1>Datos del cliente</h1>
+            <p>Ingrese los datos de los pedidos</p>
+        </div>
+        <form (ngSubmit)="capturar()" #clienteform="ngForm">
+            <div class="form-group">
+                <label>Nombre cliente:</label>
+                <input type="text" class="form-control" id="nombre" required [(ngModel)]="nombre" name="nombre" #name="ngModel" pattern="[a-zA-Z ]{2,254}">
+                <div [hidden]="name.valid || name.pristine">
+                    Nombre valido requerido
+                </div>
+                <label>Dui cliente:</label>
+                <input type="text" class="form-control" id="dui" required [(ngModel)]="dui" name="dui" #name="ngModel" pattern="[0-9]{8}-[0-9]{1}">
+                <div [hidden]="name.valid || name.pristine">
+                    Ingrese un DUI Valido
+                </div>
+                <label>Seleccione su producto</label>
+                <select [(ngModel)]="opcionSeleccionado" name="opcionSeleccionado">
+    <option value="Selecciona">Selecciona</option>
+    <option *ngFor="let u of unidades" value="{{u}}" >
+    {{u}}
+</option>
+</select>
+                <br/><br/>
+                <button type="submit" class="button" [disabled]="!clienteform.form.valid">Submit</button>
+                <button type="reset" class="button-2">Reset</button>
+            </div>
+        </form>
+
+        <table class="table" [hidden]="contador == 0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dui</th>
+                    <th>Codigo:</th>
+                    <th>Descripcion:</th>
+                    <th>Tipo de descuento:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let talumno of registro">
+                    <td>{{talumno.nombre}}</td>
+                    <td>{{talumno.dui}}</td>
+                    <td>{{talumno.codigo}}</td>
+                    <td>{{talumno.desc}}</td>
+                    <td>{{talumno.tipo}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
